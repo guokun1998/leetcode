@@ -1,0 +1,40 @@
+/*
+给定一个字符串，找出不含有重复字符的最长子串的长度。
+
+示例：
+
+给定 "abcabcbb" ，没有重复字符的最长子串是 "abc" ，那么长度就是3。
+
+给定 "bbbbb" ，最长的子串就是 "b" ，长度是1。
+
+给定 "pwwkew" ，最长子串是 "wke" ，长度是3。请注意答案必须是一个子串，"pwke" 是 子序列  而不是子串。
+更多用例："ohvhjdml"
+*/
+/*思路：读到与之前相同的删除相同的和之前的,实时更新max*/
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+
+        
+        
+        StringBuffer SB = new StringBuffer();
+        int max = 0;
+        
+        for(int i=0;i<s.length();i++){
+            if(SB.indexOf(s.substring(i,i+1)) == -1)
+            {
+                
+                SB.append(s.substring(i,i+1));
+                if(SB.length()>=max)
+                    max = SB.length();
+            }
+            
+            else{
+                if(SB.length()>=max)
+                    max = SB.length();
+                SB.delete(0,SB.indexOf(s.substring(i,i+1))+1);
+                SB.append(s.substring(i,i+1));
+            }
+        }
+        return max;
+    }
+}
